@@ -1,0 +1,8 @@
+Gearman Monitor
+Copyright (C) 2011 Yevgeny Yegorov
+All rights reserved.
+
+Gearman Monitor is a tool to watch Gearman servers. Gearman
+server version and registered workers status is now available.
+Several Gearman servers can be monitored at the same time. 
+Server and worker name filters can be applied.

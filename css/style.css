@@ -1,0 +1,18 @@
+body {margin:0;}
+body.left {background:#d0dce0; padding:20px;}
+body.content {background:whiteSmoke; padding:10px;}
+
+a:link, a:visited, a:active {color:blue; text-decoration:none;}
+
+.logo {font-size:14; padding-bottom:15px; text-align:center; text-transform:uppercase;}
+
+table th, table td {padding:3px 10px; vertical-align:top;}
+table tr.odd {background:#e5e5e5;}
+table tr.even {background:#d5d5d5;}
+th {background:#d3dce3; color:black; font-weight:bold;}
+
+#filterForm input, #filterForm select {width:100%;}
+
+.ra {text-align:right;}
+
+div.error {border:red 2px solid; padding:10px; width:100%;}
