@@ -232,20 +232,20 @@ class GA_ServerList
 
                 $gearmanManager->disconnect();
                 unset($gearmanManager);
+
+                foreach ($status as $workerName => $workerStatus)
+                {
+                    if (strlen($this->_filterName) == 0 || stripos($workerName, $this->_filterName) !== false)
+                    {
+                        $workerStatus['name'] = $workerName;
+                        $workerStatus['server'] = $server['name'];
+                        $data[] = $workerStatus;
+                    }
+                }
             }
             catch (Exception $e)
             {
                 $this->_addError($e->getMessage());
-            }
-
-            foreach ($status as $workerName => $workerStatus)
-            {
-                if (strlen($this->_filterName) == 0 || stripos($workerName, $this->_filterName) !== false)
-                {
-                    $workerStatus['name'] = $workerName;
-                    $workerStatus['server'] = $server['name'];
-                    $data[] = $workerStatus;
-                }
             }
         }
 
