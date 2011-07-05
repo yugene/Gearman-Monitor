@@ -5,8 +5,8 @@
 </head>
 <?php if ($this->gearmanClassExists) { ?>
     <frameset cols="250,*" rows="*" id="mainFrame">
-        <frame frameborder="0" id="filterFrame" name="filterFrame" src="filter.php" />
-        <frame frameborder="0" id="contentFrame" name="contentFrame" src="content.php?sort=<?php echo GA_ServerList::SORT_NAME; ?>" />
+        <frame frameborder="0" id="filterFrame" name="filterFrame" src="filter.php?action=<?php echo $this->action; ?>" />
+        <frame frameborder="0" id="contentFrame" name="contentFrame" src="<?php echo $this->action; ?>.php?sort=<?php if ($this->action != 'queue') { echo GA_ServerList::SORT_SERVER; } else { echo GA_ServerList::SORT_NAME; } ?>" />
         <noframes>
             <body>Frame-capable browser required</body>
         </noframes>

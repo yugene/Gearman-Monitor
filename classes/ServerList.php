@@ -45,6 +45,9 @@ class GA_ServerList
     const SORT_JOBS_IN_QUEUE = 'in_queue';
     const SORT_JOBS_RUNNING = 'jobs_running';
     const SORT_WORKERS = 'capable_workers';
+    const SORT_IP = 'ip';
+    const SORT_FD = 'fd';
+    const SORT_ID = 'id';
 
     const SORT_ASC = 'asc';
     const SORT_DESC = 'desc';
@@ -74,7 +77,7 @@ class GA_ServerList
         {
             $this->_filterName = (string) $options['filterName'];
         }
-        if (isset($options['sort']) && in_array($options['sort'], $this->_getSortAvailable()))
+        if (isset($options['sort']))
         {
             $this->_sort = (string) $options['sort'];
         }
@@ -249,7 +252,54 @@ class GA_ServerList
             }
         }
 
-        $data = $this->_sortFunctionData($data);
+        $data = $this->_sortData($data, $this->_getSortAvailableFunctions());
+
+        return $data;
+    }
+
+    /**
+     * Returns information about workers connected to Gearman server
+     *
+     * @return array
+     */
+    public function getWorkersData()
+    {
+        $data = array();
+
+        foreach ($this->_servers as $serverIndex => $server)
+        {
+            if (! empty($this->_filterServers) && ! in_array($serverIndex, $this->_filterServers))
+            {
+                continue;
+            }
+
+            try
+            {
+                $gearmanManager = new Net_Gearman_Manager($server['address']);
+
+                $workers = $gearmanManager->workers();
+
+                $gearmanManager->disconnect();
+                unset($gearmanManager);
+
+                foreach ($workers as $worker)
+                {
+                    if (strlen($this->_filterName) == 0 ||
+                        stripos($worker['ip'], $this->_filterName) !== false ||
+                        stripos(join('$#!', $worker['abilities']), $this->_filterName) !== false)
+                    {
+                        $worker['server'] = $server['name'];
+                        $data[] = $worker;
+                    }
+                }
+            }
+            catch (Exception $e)
+            {
+                $this->_addError($e->getMessage());
+            }
+        }
+
+        $data = $this->_sortData($data, $this->_getSortAvailableWorkers());
 
         return $data;
     }
@@ -259,7 +309,7 @@ class GA_ServerList
      *
      * @return array
      */
-    protected function _getSortAvailable()
+    protected function _getSortAvailableFunctions()
     {
         $sortAvailable = array(
             self::SORT_SERVER,
@@ -273,14 +323,31 @@ class GA_ServerList
     }
 
     /**
+     * Returns available sort column
+     *
+     * @return array
+     */
+    protected function _getSortAvailableWorkers()
+    {
+        $sortAvailable = array(
+            self::SORT_SERVER,
+            self::SORT_IP,
+            self::SORT_FD,
+            self::SORT_ID
+        );
+
+        return $sortAvailable;
+    }
+
+    /**
      * Sort Gearman functions data
      *
      * @param array $data
      * @return array 
      */
-    protected function _sortFunctionData(array $data)
+    protected function _sortData(array $data, $colsAvailable)
     {
-        if (in_array($this->_sort, $this->_getSortAvailable()))
+        if (in_array($this->_sort, $colsAvailable))
         {
             $sortCol = array();
 

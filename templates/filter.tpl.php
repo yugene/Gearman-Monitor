@@ -9,7 +9,7 @@
         Gearman Monitor
     </div>
 
-    <form id="filterForm" action="content.php" target="contentFrame">
+    <form id="filterForm" action="<?php echo $this->action; ?>.php" target="contentFrame">
         <input type="hidden" name="sort" id="filterSort" value="name" />
         <input type="hidden" name="dir" id="filterDir" value="asc" />
 

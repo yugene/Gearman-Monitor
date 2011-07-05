@@ -12,7 +12,7 @@
  * $cfgServers[$i]['name'] = 'Gearman server 1';
  * ++ $i;
  *
- * $cfgServers[$i]['address'] = '192.168.1.1:80';
+ * $cfgServers[$i]['address'] = '192.168.1.1:7003';
  * $cfgServers[$i]['name'] = 'Gearman server 2';
  * ++ $i;
  */
@@ -20,8 +20,12 @@
 $i = 0;
 $cfgServers = array();
 
-$cfgServers[$i]['address'] = '';
-$cfgServers[$i]['name'] = '';
+$cfgServers[$i]['address'] = '192.168.31.195:4730';
+$cfgServers[$i]['name'] = 'localhost';
+++ $i;
+
+$cfgServers[$i]['address'] = '192.168.31.195:4730';
+$cfgServers[$i]['name'] = 'asrv110528';
 ++ $i;
 
 ?>
