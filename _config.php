@@ -20,12 +20,8 @@
 $i = 0;
 $cfgServers = array();
 
-$cfgServers[$i]['address'] = '192.168.31.195:4730';
-$cfgServers[$i]['name'] = 'localhost';
-++ $i;
-
-$cfgServers[$i]['address'] = '192.168.31.195:4730';
-$cfgServers[$i]['name'] = 'asrv110528';
+$cfgServers[$i]['address'] = '';
+$cfgServers[$i]['name'] = '';
 ++ $i;
 
 ?>
