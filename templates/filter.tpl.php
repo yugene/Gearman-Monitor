@@ -5,8 +5,10 @@
 <body class="left">
 
     <div class="logo">
+        <a href="https://github.com/yugene/Gearman-Monitor" target="_blank">
         <img src="images/gearman.png" /><br />
         Gearman Monitor
+        </a>
     </div>
 
     <form id="filterForm" action="<?php echo $this->action; ?>.php" target="contentFrame">
