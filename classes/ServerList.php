@@ -197,7 +197,10 @@ class GA_ServerList
             {
                 $gearmanManager = new Net_Gearman_Manager($server['address']);
 
-                $data[$serverIndex] = $gearmanManager->version();
+                $data[$serverIndex] = array(
+                    'version' => $gearmanManager->version(),
+                    'address' => $server['address']
+                );
 
                 $gearmanManager->disconnect();
                 unset($gearmanManager);
