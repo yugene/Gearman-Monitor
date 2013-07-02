@@ -16,6 +16,7 @@ a:link, a:visited, a:active {color:blue; text-decoration:none;}
 table th, table td {padding:3px 10px; vertical-align:top;}
 table tr.odd {background:#e5e5e5;}
 table tr.even {background:#d5d5d5;}
+table tr:hover {background:#b6c6d7;}
 th {background:#d3dce3; color:black; font-weight:bold;}
 
 #filterForm input, #filterForm select {width:100%;}
