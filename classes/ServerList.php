@@ -34,6 +34,13 @@ class GA_ServerList
     protected $_sort = '';
 
     /**
+     * Group column name
+     *
+     * @var string
+     */
+    protected $_groupby = self::GROUP_NONE;
+
+    /**
      * Error messages
      *
      * @var array
@@ -51,6 +58,10 @@ class GA_ServerList
 
     const SORT_ASC = 'asc';
     const SORT_DESC = 'desc';
+
+    const GROUP_NONE = 'none';
+    const GROUP_SERVER = 'server';
+    const GROUP_NAME = 'name';
 
     /**
      * Class constructor
@@ -80,6 +91,10 @@ class GA_ServerList
         if (isset($options['sort']))
         {
             $this->_sort = (string) $options['sort'];
+        }
+        if (isset($options['groupby']) && in_array($options['groupby'], $this->_getGroupAvailableFunctions()))
+        {
+            $this->_groupby = (string) $options['groupby'];
         }
     }
 
@@ -168,7 +183,7 @@ class GA_ServerList
      * Add error message to error list
      *
      * @param string $message
-     * @return GA_ServerList 
+     * @return GA_ServerList
      */
     protected function _addError($message)
     {
@@ -222,6 +237,8 @@ class GA_ServerList
     public function getFunctionData()
     {
         $data = array();
+        $i = 0;
+        $groupDataTmp = array();
 
         foreach ($this->_servers as $serverIndex => $server)
         {
@@ -243,9 +260,32 @@ class GA_ServerList
                 {
                     if (strlen($this->_filterName) == 0 || stripos($workerName, $this->_filterName) !== false)
                     {
-                        $workerStatus['name'] = $workerName;
-                        $workerStatus['server'] = $server['name'];
-                        $data[] = $workerStatus;
+                        $workerStatus['name'] = ($this->_groupby == self::GROUP_SERVER) ? '+' : $workerName ;
+                        $workerStatus['server'] = ($this->_groupby == self::GROUP_NAME) ? '+' : $server['name'];
+
+                        if ($this->_groupby != self::GROUP_NONE)
+                        {
+                            if (isset($groupDataTmp[$workerStatus[$this->_groupby]]))
+                            {
+                                $k = $groupDataTmp[$workerStatus[$this->_groupby]];
+                                foreach (array('in_queue', 'jobs_running', 'capable_workers') as $key)
+                                {
+                                    $data[$k][$key] += $workerStatus[$key];
+                                }
+                            }
+                            else
+                            {
+                                $groupDataTmp[$workerStatus[$this->_groupby]] = $i;
+
+                                $data[] = $workerStatus;
+                                $i ++;
+                            }
+                        }
+                        else
+                        {
+                            $data[] = $workerStatus;
+                            $i ++;
+                        }
                     }
                 }
             }
@@ -314,15 +354,13 @@ class GA_ServerList
      */
     protected function _getSortAvailableFunctions()
     {
-        $sortAvailable = array(
+        return array(
             self::SORT_SERVER,
             self::SORT_NAME,
             self::SORT_JOBS_IN_QUEUE,
             self::SORT_JOBS_RUNNING,
             self::SORT_WORKERS
         );
-
-        return $sortAvailable;
     }
 
     /**
@@ -332,21 +370,27 @@ class GA_ServerList
      */
     protected function _getSortAvailableWorkers()
     {
-        $sortAvailable = array(
+        return array(
             self::SORT_SERVER,
             self::SORT_IP,
             self::SORT_FD,
             self::SORT_ID
         );
+    }
 
-        return $sortAvailable;
+    protected function _getGroupAvailableFunctions()
+    {
+        return array(
+            self::GROUP_SERVER,
+            self::GROUP_NAME
+        );
     }
 
     /**
      * Sort Gearman functions data
      *
      * @param array $data
-     * @return array 
+     * @return array
      */
     protected function _sortData(array $data, $colsAvailable)
     {
@@ -382,5 +426,3 @@ class GA_ServerList
         return $result;
     }
 }
-
-?>

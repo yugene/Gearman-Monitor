@@ -14,6 +14,7 @@
     <form id="filterForm" action="<?php echo $this->action; ?>.php" target="contentFrame">
         <input type="hidden" name="sort" id="filterSort" value="name" />
         <input type="hidden" name="dir" id="filterDir" value="asc" />
+        <input type="hidden" name="groupby" id="filterGroupby" value="none" />
 
         <?php if (count($this->servers) > 1) { ?>
         Servers:<br />

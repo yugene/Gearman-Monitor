@@ -23,6 +23,11 @@ if (isset($_REQUEST['sort']) && strlen(trim($_REQUEST['sort'])) > 0)
     $options['sort'] = $_REQUEST['sort'];
 }
 
+if (isset($_REQUEST['groupby']) && strlen(trim($_REQUEST['groupby'])) > 0)
+{
+    $options['groupby'] = $_REQUEST['groupby'];
+}
+
 $serverList = new GA_ServerList($options);
 $serverList->addServers($cfgServers);
 
@@ -32,5 +37,3 @@ $view->errors = $serverList->getErrors();
 $view->pageUri = $pageUri;
 
 $view->display('queue.tpl.php');
-
-?>

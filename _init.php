@@ -8,5 +8,3 @@ require_once('classes/View.php');
 $view = new GA_View();
 $view->setTemplateDir('templates');
 $view->servers = $cfgServers;
-
-?>

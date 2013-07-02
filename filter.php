@@ -13,5 +13,3 @@ else
 
 $view->action = $action;
 $view->display('filter.tpl.php');
-
-?>

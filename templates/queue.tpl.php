@@ -2,6 +2,13 @@
 
     <h2>Queue</h2>
 
+    <form class="groupFilter">
+        Group by:<br>
+        <?php $this->fnGroupRadio($this->pageUri, 'None', GA_ServerList::GROUP_NONE); ?><br>
+        <?php $this->fnGroupRadio($this->pageUri, 'Server', GA_ServerList::GROUP_SERVER); ?><br>
+        <?php $this->fnGroupRadio($this->pageUri, 'Function', GA_ServerList::GROUP_NAME); ?><br>
+    </form>
+
     <table>
         <thead>
             <tr>

@@ -5,4 +5,4 @@ All rights reserved.
 Gearman Monitor is a tool to watch [Gearman](http://gearman.org/) servers. Gearman
 server version, function queue and registered workers status is available. Several
 Gearman servers can be monitored at the same time. Server and function name filters
-can be applied.
+can be applied. Counters can be summed by server or function name.

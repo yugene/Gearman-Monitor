@@ -107,6 +107,7 @@ class GA_View
     {
         $currentSortColumn = (isset($_REQUEST['sort']) ? $_REQUEST['sort'] : '');
         $currentSortDir = (isset($_REQUEST['dir']) ? $_REQUEST['dir'] : GA_ServerList::SORT_ASC);
+        $currentGroupColumn = (isset($_REQUEST['groupby']) ? $_REQUEST['groupby'] : GA_ServerList::GROUP_NONE);
 
         $dir = GA_ServerList::SORT_ASC;
         $img = '';
@@ -124,10 +125,19 @@ class GA_View
             }
         }
 
-        $result = "<a href='{$href}sort={$value}&dir={$dir}' onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterSort\").value = \"{$value}\"; d.getElementById(\"filterDir\").value = \"{$dir}\"; return true;'>{$title} {$img}</a>";
+        $result = "<a href='{$href}sort={$value}&dir={$dir}&groupby={$currentGroupColumn}' onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterSort\").value = \"{$value}\"; d.getElementById(\"filterDir\").value = \"{$dir}\"; return true;'>{$title} {$img}</a>";
+
+        echo $result;
+    }
+
+    protected function fnGroupRadio($href, $title, $value)
+    {
+        $currentGroupColumn = (isset($_REQUEST['groupby']) ? $_REQUEST['groupby'] : GA_ServerList::GROUP_NONE);
+
+        $selected = ($value == $currentGroupColumn) ? 'checked' : '';
+
+        $result = "<label><input type='radio' name='groupby' value='{$value}' {$selected} onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterGroupby\").value = \"{$value}\"; return true;'>{$title}</label>";
 
         echo $result;
     }
 }
-
-?>

@@ -23,5 +23,3 @@ $cfgServers = array();
 $cfgServers[$i]['address'] = '';
 $cfgServers[$i]['name'] = '';
 ++ $i;
-
-?>

@@ -31,5 +31,3 @@ $view->errors = $serverList->getErrors();
 $view->pageUri = $pageUri;
 
 $view->display('workers.tpl.php');
-
-?>
