@@ -331,6 +331,7 @@ class GA_ServerList
                         stripos($worker['ip'], $this->_filterName) !== false ||
                         stripos(join('$#!', $worker['abilities']), $this->_filterName) !== false)
                     {
+                        sort($worker['abilities'], SORT_STRING);
                         $worker['server'] = $server['name'];
                         $data[] = $worker;
                     }
