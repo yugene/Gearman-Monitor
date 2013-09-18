@@ -30,7 +30,7 @@
         <?php } ?>
 
         <br />
-        Name filter:<br />
+        Function filter:<br />
         <input name="filterName" id="filterName" type="text" /><br />
 
         <br />
