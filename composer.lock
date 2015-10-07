@@ -1,0 +1,68 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "790102a486cdf513009b98916ccf077f",
+    "content-hash": "76e774b09a09cf8b976d983b6e9a492c",
+    "packages": [
+        {
+            "name": "brianlmoon/net_gearman",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/brianlmoon/net_gearman.git",
+                "reference": "b0981dbbdc9e3e08f10eaeef28d19a7b0839f85c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/brianlmoon/net_gearman/zipball/b0981dbbdc9e3e08f10eaeef28d19a7b0839f85c",
+                "reference": "b0981dbbdc9e3e08f10eaeef28d19a7b0839f85c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "Net/Gearman"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "include-path": [
+                "."
+            ],
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Brian Moon",
+                    "homepage": "http://brian.moonspot.net"
+                }
+            ],
+            "description": "PHP daemon for managing gearman workers",
+            "homepage": "http://brian.moonspot.net/GearmanManager",
+            "keywords": [
+                "gearman",
+                "gearman-manager",
+                "net_gearman"
+            ],
+            "time": "2015-05-08 20:02:36"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "brianlmoon/net_gearman": 20
+    },
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.3"
+    },
+    "platform-dev": []
+}
