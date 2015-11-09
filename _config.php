@@ -20,6 +20,6 @@
 $i = 0;
 $cfgServers = array();
 
-$cfgServers[$i]['address'] = '';
+$cfgServers[$i]['address'] = '127.0.0.1';
 $cfgServers[$i]['name'] = '';
 ++ $i;

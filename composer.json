@@ -1,0 +1,28 @@
+{
+  "name": "yugene/gearman-monitor",
+  "description": "Monitoring tool for Gearman servers",
+  "minimum-stability": "stable",
+  "authors": [
+    {
+      "name": "Yevgeny Yegorov"
+    }
+  ],
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "http://packages.zendframework.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.3.3",
+    "brianlmoon/net_gearman": "dev-master"
+  },
+  "autoload": {
+    "classmap": [
+      "classes"
+    ]
+  },
+  "include-path": [
+    "."
+  ]
+}
