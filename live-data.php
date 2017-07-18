@@ -34,7 +34,7 @@ $view->errors  = $serverList->getErrors();
 $view->pageUri = $pageUri;
 
 foreach ($functionData as $k => $v) {
-    $functionData[$k]['id_key'] = str_replace(' ', '_', $v['server'] . $v['name']);
+    $functionData[$k]['id_key'] = str_replace([' ', '/', '\\', ':', ';', ',', '"', "'", '+', '-', '?'], '_', $v['server'] . $v['name']);
 }
 
 $report = new GA_Report();

@@ -17,6 +17,6 @@
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
-<script src="js/main.js"></script>
+<script src="js/main.js?t=<?php echo time();?>"></script>
 
 <?php include 'content_footer.tpl.php';?>
