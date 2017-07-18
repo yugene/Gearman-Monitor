@@ -2,16 +2,19 @@
 <head>
     <title>Gearman Monitor</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
+    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<?php if ($this->gearmanClassExists) { ?>
+<?php if ($this->gearmanClassExists) {
+    ?>
     <frameset cols="250,*" rows="*" id="mainFrame">
-        <frame frameborder="0" id="filterFrame" name="filterFrame" src="filter.php?action=<?php echo $this->action; ?>" />
-        <frame frameborder="0" id="contentFrame" name="contentFrame" src="<?php echo $this->action; ?>.php?sort=<?php if ($this->action != 'queue') { echo GA_ServerList::SORT_SERVER; } else { echo GA_ServerList::SORT_NAME; } ?>" />
+        <frame frameborder="0" id="filterFrame" name="filterFrame" src="filter.php?action=<?php echo $this->action;?>" />
+        <frame frameborder="0" id="contentFrame" name="contentFrame" src="<?php echo $this->action;?>.php?sort=<?php if ($this->action != 'queue') {echo GA_ServerList::SORT_SERVER;} else {echo GA_ServerList::SORT_NAME;}
+    ?>" />
         <noframes>
             <body>Frame-capable browser required</body>
         </noframes>
     </frameset>
-<?php } else { ?>
+<?php } else {?>
 <body class="content">
     <div class="error">
         Net_Gearman package not found!<br />
@@ -20,6 +23,10 @@
         <br />
         <i>pear install Net_Gearman</i>
     </div>
-<?php } ?>
+<?php }
+?>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
 </body>
 </html>
