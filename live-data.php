@@ -1,5 +1,5 @@
 <?php
-
+// Set the JSON header
 require_once '_init.php';
 
 $options = array();
@@ -34,19 +34,14 @@ $view->errors  = $serverList->getErrors();
 $view->pageUri = $pageUri;
 
 foreach ($functionData as $k => $v) {
-    $functionData[$k]['id_key'] = str_replace([' ', '/', '\\', ':', ';', ',', '"', "'", '+', '-', '?'], '_', $v['server'] . $v['name']);
+    $functionData[$k]['id_key'] = str_replace(' ', '_', $v['server'] . $v['name']);
 }
 
-if (isset($_REQUEST['json'])) {
-    $report = new GA_Report();
+$report = new GA_Report();
 
-    echo json_encode([
-        'total' => $report->total($functionData),
-        'data'  => $functionData,
-    ]);
-    // $view->display('queue_table.tpl.php');
-    die();
-}
-$view->functionData = $functionData;
-
-$view->display('queue.tpl.php');
+// $view->display('queue_table.tpl.php');
+$report->total($functionData);
+header("Content-type: text/json");
+// Create a PHP array and echo it as JSON
+$ret = array(time() * 1000, $report->totalInQueue);
+echo json_encode($ret);
