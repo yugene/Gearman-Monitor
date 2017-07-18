@@ -8,10 +8,11 @@
     <label class="radio-inline"><?php $this->fnGroupRadio($this->pageUri, 'Function', GA_ServerList::GROUP_NAME);?></label>
     </ul>
 </form>
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">Realtime Graph</div>
 <div class="result">
     <?php include 'queue_table.tpl.php';?>
 </div>
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">Realtime Graph</div>
+
 
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
