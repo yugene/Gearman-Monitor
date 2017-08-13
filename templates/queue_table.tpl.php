@@ -1,5 +1,5 @@
-<table class="table table-striped table-condensed table-bordered">
-    <thead>
+<table class="table table-sm table-striped table-bordered table-responsive small">
+    <thead class="thead-default">
         <tr>
             <th><?php $this->fnSortCol($this->pageUri, 'Server', GA_ServerList::SORT_SERVER);?></th>
             <th><?php $this->fnSortCol($this->pageUri, 'Function', GA_ServerList::SORT_NAME);?></th>
@@ -10,9 +10,9 @@
     </thead>
     <tbody>
         <?php foreach ($this->functionData as $functionItem): ?>
-            <tr>
-                <td><?php echo htmlspecialchars($functionItem['server']);?></td>
-                <td><?php echo htmlspecialchars($functionItem['name']);?></td>
+            <tr <?php if ($functionItem['capable_workers'] == 0 && $functionItem['in_queue'] > 0): ?>class="table-warning"<?php endif?>>
+                <td><small><?php echo htmlspecialchars($functionItem['server']);?></small></td>
+                <td><small><?php echo htmlspecialchars($functionItem['name']);?></small></td>
                 <td class="ra" id="<?php echo $functionItem['id_key'] . 'in_queue'?>"><?php echo $functionItem['in_queue'];?></td>
                 <td class="ra" id="<?php echo $functionItem['id_key'] . 'jobs_running'?>"><?php echo $functionItem['jobs_running'];?></td>
                 <td class="ra" id="<?php echo $functionItem['id_key'] . 'capable_workers'?>">
@@ -20,6 +20,6 @@
                     <?php echo $functionItem['capable_workers'];?>
                 </td>
             </tr>
-            <?php endforeach;?>
-        </tbody>
-    </table>
+        <?php endforeach;?>
+    </tbody>
+</table>

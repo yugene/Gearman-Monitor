@@ -27,12 +27,9 @@ class GA_View
      */
     public function __get($name)
     {
-        if (isset($this->_templateVars[$name]))
-        {
+        if (isset($this->_templateVars[$name])) {
             return $this->_templateVars[$name];
-        }
-        else
-        {
+        } else {
             return null;
         }
     }
@@ -90,9 +87,8 @@ class GA_View
     {
         $template = $this->_templateDir . $templateName;
 
-        if (file_exists($template))
-        {
-            include($template);
+        if (file_exists($template)) {
+            include $template;
         }
     }
 
@@ -105,22 +101,18 @@ class GA_View
      */
     protected function fnSortCol($href, $title, $value)
     {
-        $currentSortColumn = (isset($_REQUEST['sort']) ? $_REQUEST['sort'] : '');
-        $currentSortDir = (isset($_REQUEST['dir']) ? $_REQUEST['dir'] : GA_ServerList::SORT_ASC);
+        $currentSortColumn  = (isset($_REQUEST['sort']) ? $_REQUEST['sort'] : '');
+        $currentSortDir     = (isset($_REQUEST['dir']) ? $_REQUEST['dir'] : GA_ServerList::SORT_ASC);
         $currentGroupColumn = (isset($_REQUEST['groupby']) ? $_REQUEST['groupby'] : GA_ServerList::GROUP_NONE);
 
         $dir = GA_ServerList::SORT_ASC;
         $img = '';
 
-        if ($value == $currentSortColumn)
-        {
-            if ($currentSortDir == GA_ServerList::SORT_ASC)
-            {
+        if ($value == $currentSortColumn) {
+            if ($currentSortDir == GA_ServerList::SORT_ASC) {
                 $dir = GA_ServerList::SORT_DESC;
                 $img = '<img src="images/s_asc.png" />';
-            }
-            else
-            {
+            } else {
                 $img = '<img src="images/s_desc.png" />';
             }
         }
@@ -136,7 +128,7 @@ class GA_View
 
         $selected = ($value == $currentGroupColumn) ? 'checked' : '';
 
-        $result = "<label><input type='radio' name='groupby' value='{$value}' {$selected} onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterGroupby\").value = \"{$value}\"; return true;'>{$title}</label>";
+        $result = "<label class=\"form-check-label\"><input type='radio' class=\"form-check-input\" name='groupby' value='{$value}' {$selected} onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterGroupby\").value = \"{$value}\"; return true;'> {$title}</label>";
 
         echo $result;
     }

@@ -2,11 +2,13 @@
 <head>
     <title>Gearman Monitor</title>
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- <link href="https://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+
 </head>
 <?php if ($this->gearmanClassExists) {
     ?>
-    <frameset cols="250,*" rows="*" id="mainFrame">
+    <frameset cols="200,*" rows="*" id="mainFrame">
         <frame frameborder="0" id="filterFrame" name="filterFrame" src="filter.php?action=<?php echo $this->action;?>" />
         <frame frameborder="0" id="contentFrame" name="contentFrame" src="<?php echo $this->action;?>.php?sort=<?php if ($this->action != 'queue') {echo GA_ServerList::SORT_SERVER;} else {echo GA_ServerList::SORT_NAME;}
     ?>" />
