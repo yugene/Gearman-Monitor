@@ -10,12 +10,12 @@
     </thead>
     <tbody>
         <?php foreach ($this->functionData as $functionItem): ?>
-            <tr <?php if ($functionItem['capable_workers'] == 0 && $functionItem['in_queue'] > 0): ?>class="table-warning"<?php endif?>>
+            <tr id="<?php echo $functionItem['id_key'] . 'w'?>" <?php if ($functionItem['capable_workers'] == 0 && $functionItem['in_queue'] > 0): ?>class="table-warning"<?php endif?>>
                 <td><small><?php echo htmlspecialchars($functionItem['server']);?></small></td>
                 <td><small><?php echo htmlspecialchars($functionItem['name']);?></small></td>
-                <td class="ra" id="<?php echo $functionItem['id_key'] . 'in_queue'?>"><?php echo $functionItem['in_queue'];?></td>
-                <td class="ra" id="<?php echo $functionItem['id_key'] . 'jobs_running'?>"><?php echo $functionItem['jobs_running'];?></td>
-                <td class="ra" id="<?php echo $functionItem['id_key'] . 'capable_workers'?>">
+                <td id="<?php echo $functionItem['id_key'] . 'in_queue'?>"><?php echo $functionItem['in_queue'];?></td>
+                <td id="<?php echo $functionItem['id_key'] . 'jobs_running'?>"><?php echo $functionItem['jobs_running'];?></td>
+                <td id="<?php echo $functionItem['id_key'] . 'capable_workers'?>">
                     <?php if ($functionItem['capable_workers'] == 0 && $functionItem['in_queue'] > 0): ?><img src="images/s_warn.png" /><?php endif;?>
                     <?php echo $functionItem['capable_workers'];?>
                 </td>

@@ -36,7 +36,7 @@
             <label for="filterName">Name filter:</label>
             <input class="form-control form-control-sm" name="filterName" id="filterName" type="text" /><br />
         </div>
-        <input class="btn btn-light" name="submit" type="submit" value="Apply" />
+        <input class="btn btn-light btn-block btn-sm" name="submit" type="submit" value="Apply" />
 
     </form>
 

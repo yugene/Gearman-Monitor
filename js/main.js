@@ -23,11 +23,24 @@ function requestTableData(url, element) {
         success: function(info) {
             var obj = jQuery.parseJSON(info);
             if (obj['data']) {
+                var totalInQueueWorkers = 0;
+                var totalRunningWorkers = 0;
                 for (var i = obj['data'].length - 1; i >= 0; i--) {
+                    var showProblem = '';
+                    if (obj['data'][i]['in_queue'] > obj['data'][i]['jobs_running'] && obj['data'][i]['jobs_running'] == 0) {
+                        showProblem = '<img src="images/s_warn.png" />';
+                        $('#' + obj['data'][i]['id_key'] + 'w').addClass('table-warning');
+                    } else {
+                        $('#' + obj['data'][i]['id_key'] + 'w').removeClass('table-warning');
+                    }
+                    totalInQueueWorkers += parseInt(obj['data'][i]['in_queue']);
+                    totalRunningWorkers += parseInt(obj['data'][i]['jobs_running']);
                     $('#' + obj['data'][i]['id_key'] + 'in_queue').html(obj['data'][i]['in_queue']);
                     $('#' + obj['data'][i]['id_key'] + 'jobs_running').html(obj['data'][i]['jobs_running']);
-                    $('#' + obj['data'][i]['id_key'] + 'capable_workers').html(obj['data'][i]['capable_workers']);
+                    $('#' + obj['data'][i]['id_key'] + 'capable_workers').html(showProblem + obj['data'][i]['capable_workers']);
                 }
+                $('#totalInQueueWorkers').html(totalInQueueWorkers);
+                $('#totalRunningWorkers').html(totalRunningWorkers);
             }
         }
     });

@@ -1,8 +1,7 @@
 <?php include 'content_header.tpl.php';?>
 <div class="container-fluid">
     <h2>Gearman servers</h2>
-
-    <table class="table table-sm table-striped table-bordered table-responsive">
+    <table class="table table-sm table-striped table-bordered table-responsive small">
         <thead>
             <tr>
                 <th>Server</th>
@@ -11,16 +10,14 @@
             </tr>
         </thead>
         <tbody>
-            <?php $i = 0;foreach ($this->versionData as $serverIndex => $serverData) {?>
-            <tr class="<?php echo ($i % 2 ? "even" : "odd");?>">
+            <?php foreach ($this->versionData as $serverIndex => $serverData): ?>
+            <tr>
                 <td><?php echo htmlspecialchars($this->servers[$serverIndex]['name']);?></td>
-                <td class="ra"><?php echo $serverData['address'];?></td>
-                <td class="ra"><?php echo $serverData['version'];?></td>
+                <td><?php echo $serverData['address'];?></td>
+                <td><?php echo $serverData['version'];?></td>
             </tr>
-            <?php $i++;}
-?>
+            <?php endforeach;?>
         </tbody>
     </table>
-
 <?php include 'content_footer.tpl.php';?>
 </div>
