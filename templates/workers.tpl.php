@@ -1,5 +1,6 @@
 <?php include 'content_header.tpl.php';?>
-<div class="container-fluid">
+<div class="container-fluid pt-3">
+    <h2>Workers</h2>
     <table class="table table-sm table-striped table-bordered table-responsive small">
         <thead>
             <tr>
@@ -29,6 +30,6 @@
 
         </tbody>
     </table>
-
-<?php include 'content_footer.tpl.php';?>
 </div>
+<?php include 'content_footer.tpl.php';?>
+

@@ -128,7 +128,7 @@ class GA_View
 
         $selected = ($value == $currentGroupColumn) ? 'checked' : '';
 
-        $result = "<label class=\"form-check-label\"><input type='radio' class=\"form-check-input\" name='groupby' value='{$value}' {$selected} onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterGroupby\").value = \"{$value}\"; return true;'> {$title}</label>";
+        $result = "<label class=\"form-check-label\"><input type='radio' class=\"form-check-input\" name='groupby' value='{$value}' {$selected}> {$title}</label>";
 
         echo $result;
     }

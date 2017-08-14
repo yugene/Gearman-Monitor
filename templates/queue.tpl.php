@@ -1,27 +1,35 @@
 <?php include 'content_header.tpl.php';?>
 <div class="container-fluid">
-    <form>
-        <div class="form-group row">
-            <label for="staticEmail" class="col-sm-2 col-form-label">Group By: </label>
-            <div class="col-sm-6">
-                <div class="form-check form-check-inline"><?php $this->fnGroupRadio($this->pageUri, 'None', GA_ServerList::GROUP_NONE);?></div>
-                <div class="form-check form-check-inline"><?php $this->fnGroupRadio($this->pageUri, 'Server', GA_ServerList::GROUP_SERVER);?></div>
-                <div class="form-check form-check-inline"><?php $this->fnGroupRadio($this->pageUri, 'Function', GA_ServerList::GROUP_NAME);?></div>
+    <div class="row">
+        <div class="col-sm-12 col-md-10" id="graph_1_second" style="min-width: 310px; height: 400px; margin: 0 auto">Realtime Graph</div>
+        <div class="cols-sm-12 col-md-2">
+            <div class="row text-center">
+                <div class="badge badge-warning">In Queue: <span id="totalInQueueWorkers">0</span></div>
+                <div class="badge badge-info">Running: <span id="totalRunningWorkers">0</span></div>
+                <div class="badge badge-dark">Last time: <span id="totalInQueueDiff">0</span></div>
             </div>
-            <div class="col-sm-2 text-right"><div class="badge badge-warning">Jobs in Queue: <span id="totalInQueueWorkers">0</span></div></div>
-            <div class="col-sm-2"><div class="badge badge-info">Jobs Running: <span id="totalRunningWorkers">0</span></div></div>
+
+            <p class="pt-3">
+                <button class="btn btn-secondary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                    Filter
+                </button>
+            </p>
+            <div class="collapse" id="collapseExample">
+                <div class="card card-body">
+                    <?php include 'search.tpl.php';?>
+                </div>
+            </div>
         </div>
-    </form>
-    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto">Realtime Graph</div>
+    </div>
     <div class="result">
         <?php include 'queue_table.tpl.php';?>
     </div>
 
-
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" integrity="sha384-b/U6ypiBEHpOf/4+1nzFpr53nxSS+GLCkfwBdFNTxtclqqenISfwAzpKaMNFNmj4" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
     <script src="js/main.js?t=<?php echo time();?>"></script>
-
-    <?php include 'content_footer.tpl.php';?>
 </div>
+<?php include 'content_footer.tpl.php';?>

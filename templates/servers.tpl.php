@@ -1,6 +1,6 @@
 <?php include 'content_header.tpl.php';?>
-<div class="container-fluid">
-    <h2>Gearman servers</h2>
+<div class="container-fluid pt-3">
+    <h2>Servers</h2>
     <table class="table table-sm table-striped table-bordered table-responsive small">
         <thead>
             <tr>
@@ -19,5 +19,6 @@
             <?php endforeach;?>
         </tbody>
     </table>
-<?php include 'content_footer.tpl.php';?>
 </div>
+<?php include 'content_footer.tpl.php';?>
+

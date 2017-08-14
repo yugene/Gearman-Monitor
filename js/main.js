@@ -16,6 +16,21 @@ function requestChartData() {
     });
 }
 
+function setStorageTotal(totalInQueueWorkers, totalRunningWorkers) {
+    var lastTotalRunningWorkers = parseInt(sessionStorage.getItem('totalRunningWorkers'));
+    var lastTotalInQueueWorkers = parseInt(sessionStorage.getItem('totalInQueueWorkers'));
+    var diff = totalRunningWorkers - lastTotalRunningWorkers;
+    $('#totalInQueueWorkers').html(totalInQueueWorkers);
+    $('#totalInQueueDiff').html(diff);
+    $('#totalRunningWorkers').html(totalRunningWorkers);
+    if (totalInQueueWorkers) {
+        sessionStorage.setItem('totalInQueueWorkers', totalInQueueWorkers);
+    }
+    if (totalRunningWorkers) {
+        sessionStorage.setItem('totalRunningWorkers', totalRunningWorkers);
+    }
+}
+
 function requestTableData(url, element) {
     $.ajax({
         method: 'GET',
@@ -39,8 +54,7 @@ function requestTableData(url, element) {
                     $('#' + obj['data'][i]['id_key'] + 'jobs_running').html(obj['data'][i]['jobs_running']);
                     $('#' + obj['data'][i]['id_key'] + 'capable_workers').html(showProblem + obj['data'][i]['capable_workers']);
                 }
-                $('#totalInQueueWorkers').html(totalInQueueWorkers);
-                $('#totalRunningWorkers').html(totalRunningWorkers);
+                setStorageTotal(totalInQueueWorkers, totalRunningWorkers);
             }
         }
     });
@@ -48,7 +62,7 @@ function requestTableData(url, element) {
 $(document).ready(function() {
     chart = new Highcharts.Chart({
         chart: {
-            renderTo: 'container',
+            renderTo: 'graph_1_second',
             defaultSeriesType: 'spline',
             events: {
                 load: requestChartData
@@ -67,7 +81,7 @@ $(document).ready(function() {
             maxPadding: 0.2,
             title: {
                 text: 'Total',
-                margin: 80
+                margin: 20
             }
         },
         series: [{
