@@ -1,4 +1,4 @@
-<table class="table table-sm table-striped table-bordered table-responsive small">
+<table class="table table-sm table-striped table-bordered small">
     <thead class="thead-default">
         <tr>
             <th><?php $this->fnSortCol($this->pageUri, 'Server', GA_ServerList::SORT_SERVER);?></th>
