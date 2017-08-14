@@ -69,20 +69,20 @@ $(document).ready(function() {
             }
         },
         title: {
-            text: 'Jobs in Queue'
+            text: '',
+            style: {
+                display: 'none'
+            }
         },
         xAxis: {
             type: 'datetime',
             tickPixelInterval: 150,
-            maxZoom: 20 * 1000
+            maxZoom: 20 * 1000,
         },
         yAxis: {
             minPadding: 0.2,
             maxPadding: 0.2,
-            title: {
-                text: 'Total',
-                margin: 20
-            }
+            title: false
         },
         series: [{
             name: 'Total',

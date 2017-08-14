@@ -1,8 +1,8 @@
 <?php include 'content_header.tpl.php';?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 col-md-10" id="graph_1_second" style="min-width: 310px; height: 400px; margin: 0 auto">Realtime Graph</div>
-        <div class="cols-sm-12 col-md-2">
+        <div class="col-sm-12 col-md-9" id="graph_1_second" style="min-width: 310px; height: 300px; margin: 0 auto">Realtime Graph</div>
+        <div class="cols-sm-12 col-md-3 pt-3">
             <div class="row text-center">
                 <div class="badge badge-warning">In Queue: <span id="totalInQueueWorkers">0</span></div>
                 <div class="badge badge-info">Running: <span id="totalRunningWorkers">0</span></div>

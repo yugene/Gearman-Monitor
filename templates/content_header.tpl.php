@@ -12,7 +12,7 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+            <ul class="navbar-nav mr-auto mt-lg-0">
                 <li class="nav-item<?php if (basename($_SERVER['PHP_SELF']) == 'queue.php'): ?> active<?php endif;?>">
                     <a class="nav-link" target="_parent" href="queue.php" >Queue <span class="sr-only">(current)</span></a>
                 </li>
