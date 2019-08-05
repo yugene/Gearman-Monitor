@@ -49,7 +49,8 @@ function requestTableData(url, element) {
         "&dir=" +
         $("#filterDir").val() +
         "&groupby=" +
-        $("#filterGroupby").val();
+        $("#filterGroupby").val()
+        +'&filterName=' + $("#filterName").val();
     $.ajax({
         method: "GET",
         url: url,
