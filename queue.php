@@ -1,8 +1,9 @@
 <?php
+ini_set('display_errors', 1);
 
 require_once '_init.php';
 
-$options = array();
+$options = [];
 $pageUri = "{$_SERVER['PHP_SELF']}?";
 
 if (isset($_REQUEST['filterServers']) && is_array($_REQUEST['filterServers'])) {
@@ -39,12 +40,11 @@ foreach ($functionData as $k => $v) {
 
 if (isset($_REQUEST['json'])) {
     $report = new GA_Report();
-
+    header('Content-Type: application/json');
     echo json_encode([
         'total' => $report->total($functionData),
         'data'  => $functionData,
     ]);
-    // $view->display('queue_table.tpl.php');
     die();
 }
 $view->functionData = $functionData;

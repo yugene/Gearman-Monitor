@@ -32,11 +32,13 @@ function setStorageTotal(totalInQueueWorkers, totalRunningWorkers) {
 }
 
 function requestTableData(url, element) {
+    url += '&sort=' + $('#filterSort').val() + '&dir=' + $('#filterDir').val() + '&groupby=' + $('#filterGroupby').val();
     $.ajax({
         method: 'GET',
         url: url,
         success: function(info) {
             var obj = jQuery.parseJSON(info);
+            var html = '';
             if (obj['data']) {
                 var totalInQueueWorkers = 0;
                 var totalRunningWorkers = 0;
@@ -50,11 +52,28 @@ function requestTableData(url, element) {
                     }
                     totalInQueueWorkers += parseInt(obj['data'][i]['in_queue']);
                     totalRunningWorkers += parseInt(obj['data'][i]['jobs_running']);
-                    $('#' + obj['data'][i]['id_key'] + 'in_queue').html(obj['data'][i]['in_queue']);
-                    $('#' + obj['data'][i]['id_key'] + 'jobs_running').html(obj['data'][i]['jobs_running']);
-                    $('#' + obj['data'][i]['id_key'] + 'capable_workers').html(showProblem + obj['data'][i]['capable_workers']);
+
+                    // $('#' + obj['data'][i]['id_key'] + 'in_queue').html(obj['data'][i]['in_queue']);
+                    // $('#' + obj['data'][i]['id_key'] + 'jobs_running').html(obj['data'][i]['jobs_running']);
+                    // $('#' + obj['data'][i]['id_key'] + 'capable_workers').html(showProblem + obj['data'][i]['capable_workers']);
+                    // capable_workers: "0"
+                    // id_key: "XPG_CDNServerOfferAWSAddressModerate"
+                    // in_queue: "0"
+                    // jobs_running: "0"
+                    // name: "OfferAWSAddressModerate"
+                    // server: "XPG CDNServer"
+                    html += '<tr id="' + obj['data'][i]['id_key'] + 'w"' + (obj['data'][i]['capable_workers'] == 0 && obj['data'][i]['in_queue'] > 0 ? 'class="table-warning"':'')+'>';
+                    html += '<td><small>'+obj['data'][i]['server']+'</small></td>';
+                    html += '<td><small>'+obj['data'][i]['name']+'</small></td>';
+                    html += '<td id = "' + obj['data'][i]['id_key'] + 'in_queue">' + obj['data'][i]['in_queue']+'</td>';
+                    html += '<td id = "' + obj['data'][i]['id_key'] + 'jobs_running">' + obj['data'][i]['jobs_running']+'</td>';
+                    html += '<td id = "'+obj['data'][i]['id_key'] + 'capable_workers">';
+                    html += (obj['data'][i]['capable_workers'] == 0 && obj['data'][i]['in_queue'] > 0 ?'<img src="images/s_warn.png" />':'');
+                    html += obj['data'][i]['capable_workers'] +'</td>';
+                    html +'</tr>';
                 }
                 setStorageTotal(totalInQueueWorkers, totalRunningWorkers);
+                $('#table > tbody').html(html);
             }
         }
     });
@@ -91,5 +110,5 @@ $(document).ready(function() {
     });
     setInterval(function() {
         requestTableData('queue.php?json', '.result');
-    }, 2000);
+    }, 5000);
 });
