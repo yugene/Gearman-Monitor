@@ -1,4 +1,4 @@
-<form class="small" action="<?php echo $this->action; ?>.php">
+<form class="small" action="<?php echo $this->action; ?>.php" id="search">
     <input type="hidden" name="sort" id="filterSort" value="<?php echo $this->sort ? $this->sort : 'name' ?>" />
     <input type="hidden" name="dir" id="filterDir" value="<?php echo $this->dir ? $this->dir : 'asc' ?>" />
     <input type="hidden" name="groupby" id="filterGroupby" value="none" />

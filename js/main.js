@@ -51,6 +51,11 @@ function requestTableData(url, element) {
         "&groupby=" +
         $("#filterGroupby").val()
         +'&filterName=' + $("#filterName").val();
+        $('#filterServers option').each(function (i) {
+            if (this.selected == true) {
+                url += '&filterServers[]='+(this.value);
+            }
+        });
     $.ajax({
         method: "GET",
         url: url,
@@ -122,6 +127,7 @@ function requestTableData(url, element) {
                 }
             }
             $("#table > tbody").html(html);
+            $('#search >button').html('Search').attr('disabled',false);
         }
     });
 }
@@ -175,6 +181,12 @@ $(document).ready(function() {
         console.log($("#filterSort").val());
         console.log($("#filterDir").val());
         requestTableData("queue.php?json", ".result");
+    });
+    $('#search').submit(function(e){
+        e.preventDefault();
+        $('#search > button').html('Searching...').attr('disabled', true);
+        requestTableData("queue.php?json", ".result");
+        return false;
     });
 });
 requestTableData("queue.php?json", ".result");
