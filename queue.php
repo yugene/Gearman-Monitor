@@ -24,21 +24,21 @@ if (isset($_REQUEST['groupby']) && strlen(trim($_REQUEST['groupby'])) > 0) {
     $options['groupby'] = $_REQUEST['groupby'];
 }
 
-$serverList = new GA_ServerList($options);
-$serverList->addServers($cfgServers);
-
-$functionData = $serverList->getFunctionData();
-
-$view->versionData = $serverList->getVersionData();
-
-$view->errors  = $serverList->getErrors();
-$view->pageUri = $pageUri;
-
-foreach ($functionData as $k => $v) {
-    $functionData[$k]['id_key'] = str_replace([' ', '/', '\\', ':', ';', ',', '"', "'", '+', '-', '?'], '_', $v['server'] . $v['name']);
-}
-
 if (isset($_REQUEST['json'])) {
+    $serverList = new GA_ServerList($options);
+    $serverList->addServers($cfgServers);
+
+    $functionData = $serverList->getFunctionData();
+
+    $view->versionData = $serverList->getVersionData();
+
+    $view->errors  = $serverList->getErrors();
+    $view->pageUri = $pageUri;
+
+    foreach ($functionData as $k => $v) {
+        $functionData[$k]['id_key'] = str_replace([' ', '/', '\\', ':', ';', ',', '"', "'", '+', '-', '?'], '_', $v['server'] . $v['name']);
+    }
+
     $report = new GA_Report();
     header('Content-Type: application/json');
     echo json_encode([
@@ -47,7 +47,7 @@ if (isset($_REQUEST['json'])) {
     ]);
     die();
 }
-$view->functionData = $functionData;
+
 $view->assign('tableTime', $jsTableTime);
 $view->assign('graphTime', $jsGraphTime);
 $view->display('queue.tpl.php');

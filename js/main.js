@@ -45,7 +45,7 @@ function requestTableData(url, element) {
         url: url,
         success: function(info) {
             try{
-            var obj = info
+                var obj = info
             } catch (e) {
                 var html = '<tr><td colspan="5">No jobs in queue</td></tr>';
                 $('#table > tbody').html(html);
@@ -112,5 +112,18 @@ $(document).ready(function() {
     setInterval(function() {
         requestTableData('queue.php?json', '.result');
     }, jsTableTime);
+    $('.sortTable').click(
+        function () {
+            $('.sortTable').removeClass('up');
+            $('.sortTable').removeClass('down');
+
+            $(this).data('sort', ($(this).data('sort') == 'asc' ? 'desc' : 'asc'));
+            $(this).addClass(($(this).data('sort') === 'asc' ? 'up' : 'down'));
+            $('#filterSort').val($(this).data('id'));
+            $('#filterGroupby').val($(this).data('group'));
+            console.log($('#filterSort').val());
+            console.log($('#filterDir').val());
+        }
+    );
 });
 requestTableData('queue.php?json', '.result');

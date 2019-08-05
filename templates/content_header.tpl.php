@@ -2,8 +2,22 @@
 <head>
     <!-- <link rel="stylesheet" type="text/css" href="css/style.css" /> -->
     <link rel="shortcut icon" type="image/png" href="images/favicon.png"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <meta>
+    <style>
+
+thead th a {
+    background-repeat: no-repeat;
+    background-position: right center;
+}
+thead th a.up {
+    padding-right: 20px;
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjI8Bya2wnINUMopZAQA7);
+}
+thead th a.down {
+    padding-right: 20px;
+    background-image: url(data:image/gif;base64,R0lGODlhFQAEAIAAACMtMP///yH5BAEAAAEALAAAAAAVAAQAAAINjB+gC+jP2ptn0WskLQA7);
+}</style>
 </head>
 <body class="content">
     <nav class="navbar navbar-light navbar-expand-md" style="background-color: #d0dce0;">
@@ -29,7 +43,7 @@
         <div class="alert alert-danger" role="alert">
             <strong>Errors: </strong>
             <?php foreach ($this->errors as $error): ?>
-                <p><?php echo htmlspecialchars($error);?></p>
+                <p><?php echo htmlspecialchars($error); ?></p>
             <?php endforeach;?>
         </div>
     <?php endif;?>

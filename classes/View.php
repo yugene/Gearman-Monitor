@@ -117,7 +117,7 @@ class GA_View
             }
         }
 
-        $result = "<a href='{$href}sort={$value}&dir={$dir}&groupby={$currentGroupColumn}' onclick='var d = window.parent.filterFrame.document; d.getElementById(\"filterSort\").value = \"{$value}\"; d.getElementById(\"filterDir\").value = \"{$dir}\"; return true;'>{$title} {$img}</a>";
+        $result = "<a href='{$href}sort={$value}&dir={$dir}&groupby={$currentGroupColumn}' onclick='window.document.getElementById(\"filterSort\").value = \"{$value}\"; window.document.getElementById(\"filterDir\").value = \"{$dir}\"; return true;'>{$title} {$img}</a>";
 
         echo $result;
     }
