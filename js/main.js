@@ -163,13 +163,13 @@ $(document).ready(function() {
         $(".sortTable")
             .removeClass("up")
             .removeClass("down");
-        $(this)
-            .data("sort", $(this).data("sort") == "asc" ? "desc" : "asc")
-            .addClass($(this).data("sort") === "asc" ? "up" : "down");
+        $(this).data("sort", $(this).data("sort") == "asc" ? "desc" : "asc")
+        $(this).addClass($(this).data("sort") === "asc" ? "up" : "down");
         $("#filterDir").addClass(
             $(this).data("sort") === "asc" ? "up" : "down"
         );
         $("#filterSort").val($(this).data("id"));
+        $("#filterDir").val($(this).data("sort"));
         $("#filterGroupby").val($(this).data("group"));
         console.log($("#filterSort").val());
         console.log($("#filterDir").val());
