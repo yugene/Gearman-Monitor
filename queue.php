@@ -48,5 +48,6 @@ if (isset($_REQUEST['json'])) {
     die();
 }
 $view->functionData = $functionData;
-
+$view->assign('tableTime', $jsTableTime);
+$view->assign('graphTime', $jsGraphTime);
 $view->display('queue.tpl.php');

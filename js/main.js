@@ -1,5 +1,12 @@
 var chart;
-
+var jsGraphTime = 2000;
+var jsTableTime = 5000;
+if(document.getElementById('tableTime')){
+    jsTableTime = parseInt(document.getElementById('tableTime').value);
+}
+if (document.getElementById('graphTime')) {
+    jsGraphTime = parseInt(document.getElementById('graphTime').value);
+}
 function requestChartData() {
     $.ajax({
         url: 'live-data.php',
@@ -10,7 +17,7 @@ function requestChartData() {
             // add the point
             chart.series[0].addPoint(point, true, shift);
             // call it again after one second
-            setTimeout(requestChartData, 1000);
+            setTimeout(requestChartData, jsGraphTime);
         },
         cache: false
     });
@@ -37,44 +44,38 @@ function requestTableData(url, element) {
         method: 'GET',
         url: url,
         success: function(info) {
-            var obj = jQuery.parseJSON(info);
-            var html = '';
+            try{
+            var obj = info
+            } catch (e) {
+                var html = '<tr><td colspan="5">No jobs in queue</td></tr>';
+                $('#table > tbody').html(html);
+                return false;
+            }
+            var html = '<tr><td colspan="5">No jobs in queue</td></tr>';
             if (obj['data']) {
                 var totalInQueueWorkers = 0;
                 var totalRunningWorkers = 0;
-                for (var i = obj['data'].length - 1; i >= 0; i--) {
-                    var showProblem = '';
-                    if (obj['data'][i]['in_queue'] > obj['data'][i]['jobs_running'] && obj['data'][i]['jobs_running'] == 0) {
-                        showProblem = '<img src="images/s_warn.png" />';
-                        $('#' + obj['data'][i]['id_key'] + 'w').addClass('table-warning');
-                    } else {
-                        $('#' + obj['data'][i]['id_key'] + 'w').removeClass('table-warning');
-                    }
-                    totalInQueueWorkers += parseInt(obj['data'][i]['in_queue']);
-                    totalRunningWorkers += parseInt(obj['data'][i]['jobs_running']);
+                if (obj['data'].length>0){
+                    html = '';
+                    for (var i = 0; i < obj['data'].length; i++) {
+                        totalInQueueWorkers += parseInt(obj['data'][i]['in_queue']);
+                        totalRunningWorkers += parseInt(obj['data'][i]['jobs_running']);
 
-                    // $('#' + obj['data'][i]['id_key'] + 'in_queue').html(obj['data'][i]['in_queue']);
-                    // $('#' + obj['data'][i]['id_key'] + 'jobs_running').html(obj['data'][i]['jobs_running']);
-                    // $('#' + obj['data'][i]['id_key'] + 'capable_workers').html(showProblem + obj['data'][i]['capable_workers']);
-                    // capable_workers: "0"
-                    // id_key: "XPG_CDNServerOfferAWSAddressModerate"
-                    // in_queue: "0"
-                    // jobs_running: "0"
-                    // name: "OfferAWSAddressModerate"
-                    // server: "XPG CDNServer"
-                    html += '<tr id="' + obj['data'][i]['id_key'] + 'w"' + (obj['data'][i]['capable_workers'] == 0 && obj['data'][i]['in_queue'] > 0 ? 'class="table-warning"':'')+'>';
-                    html += '<td><small>'+obj['data'][i]['server']+'</small></td>';
-                    html += '<td><small>'+obj['data'][i]['name']+'</small></td>';
-                    html += '<td id = "' + obj['data'][i]['id_key'] + 'in_queue">' + obj['data'][i]['in_queue']+'</td>';
-                    html += '<td id = "' + obj['data'][i]['id_key'] + 'jobs_running">' + obj['data'][i]['jobs_running']+'</td>';
-                    html += '<td id = "'+obj['data'][i]['id_key'] + 'capable_workers">';
-                    html += (obj['data'][i]['capable_workers'] == 0 && obj['data'][i]['in_queue'] > 0 ?'<img src="images/s_warn.png" />':'');
-                    html += obj['data'][i]['capable_workers'] +'</td>';
-                    html +'</tr>';
+                        html += '<tr id="' + obj['data'][i]['id_key'] + 'w"' + (obj['data'][i]['capable_workers'] == 0 && obj['data'][i]['in_queue'] > 0 ? 'class="table-warning"':'')+'>';
+                        html += '<td><small>'+obj['data'][i]['server']+'</small></td>';
+                        html += '<td><small>'+obj['data'][i]['name']+'</small></td>';
+                        html += '<td id = "' + obj['data'][i]['id_key'] + 'in_queue">' + obj['data'][i]['in_queue']+'</td>';
+                        html += '<td id = "' + obj['data'][i]['id_key'] + 'jobs_running">' + obj['data'][i]['jobs_running']+'</td>';
+                        html += '<td id = "'+obj['data'][i]['id_key'] + 'capable_workers">';
+                        html += (obj['data'][i]['capable_workers'] == 0 && obj['data'][i]['in_queue'] > 0 ?'<img src="images/s_warn.png" />':'');
+                        html += obj['data'][i]['capable_workers'] +'</td>';
+                        html +'</tr>';
+                    }
+                    setStorageTotal(totalInQueueWorkers, totalRunningWorkers);
+                    $('#table > tbody').html(html);
                 }
-                setStorageTotal(totalInQueueWorkers, totalRunningWorkers);
-                $('#table > tbody').html(html);
             }
+            $('#table > tbody').html(html);
         }
     });
 }
@@ -110,5 +111,6 @@ $(document).ready(function() {
     });
     setInterval(function() {
         requestTableData('queue.php?json', '.result');
-    }, 5000);
+    }, jsTableTime);
 });
+requestTableData('queue.php?json', '.result');
