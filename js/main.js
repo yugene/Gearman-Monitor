@@ -1,23 +1,28 @@
 var chart;
 var jsGraphTime = 2000;
 var jsTableTime = 5000;
+
 if (document.getElementById("tableTime")) {
     jsTableTime = parseInt(document.getElementById("tableTime").value);
 }
 if (document.getElementById("graphTime")) {
     jsGraphTime = parseInt(document.getElementById("graphTime").value);
 }
+
 function requestChartData() {
     $.ajax({
         url: "live-data.php",
         success: function(point) {
-            var series = chart.series[0],
-                shift = series.data.length > 20; // shift if the series is
-            // longer than 20
-            // add the point
-            chart.series[0].addPoint(point, true, shift);
+            if(chart.series){
+                var series = chart.series[0];
+                var shift = series.data.length > 20; // shift if the series is
+                // longer than 20
+                // add the point
+                chart.series[0].addPoint(point, true, shift);
+            }
             // call it again after one second
             setTimeout(requestChartData, jsGraphTime);
+
         },
         cache: false
     });
@@ -25,12 +30,12 @@ function requestChartData() {
 
 function setStorageTotal(totalInQueueWorkers, totalRunningWorkers) {
     var lastTotalRunningWorkers = parseInt(
-        sessionStorage.getItem("totalRunningWorkers")
+        sessionStorage.getItem("totalInQueueWorkers")
     );
     var lastTotalInQueueWorkers = parseInt(
         sessionStorage.getItem("totalInQueueWorkers")
     );
-    var diff = totalRunningWorkers - lastTotalRunningWorkers;
+    var diff = lastTotalRunningWorkers - totalInQueueWorkers;
     $("#totalInQueueWorkers").html(totalInQueueWorkers);
     $("#totalInQueueDiff").html(diff);
     $("#totalRunningWorkers").html(totalRunningWorkers);
@@ -51,11 +56,11 @@ function requestTableData(url, element) {
         "&groupby=" +
         $("#filterGroupby").val()
         +'&filterName=' + $("#filterName").val();
-        $('#filterServers option').each(function (i) {
-            if (this.selected == true) {
-                url += '&filterServers[]='+(this.value);
-            }
-        });
+    $('#filterServers option').each(function (i) {
+        if (this.selected == true) {
+            url += '&filterServers[]='+(this.value);
+        }
+    });
     $.ajax({
         method: "GET",
         url: url,
@@ -163,7 +168,7 @@ $(document).ready(function() {
             }
         ]
     });
-    setInterval(function() {
+    setInterval(function () {
         requestTableData("queue.php?json", ".result");
     }, jsTableTime);
     $(".sortTable").click(function() {

@@ -1,14 +1,23 @@
 <?php include 'content_header.tpl.php';?>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-sm-12 col-md-9" id="graph_1_second" style="min-width: 310px; height: 300px; margin: 0 auto">Realtime Graph</div>
-        <div class="cols-sm-12 col-md-3 pt-3">
-            <div class="row text-center">
-                <div class="badge badge-warning">In Queue: <span id="totalInQueueWorkers">0</span></div>
-                <div class="badge badge-info">Running: <span id="totalRunningWorkers">0</span></div>
-                <div class="badge badge-dark">Last time: <span id="totalInQueueDiff">0</span></div>
-            </div>
+        <div class="col-sm-12 col-md-6" id="graph_1_second" style="min-width: 210px; height: 200px; margin: 0 auto">Realtime Graph</div>
+        <div class="cols-sm-12 col-md-6 pt-3">
 
+                <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        In Queue
+                        <span class="badge badge-warning badge-pill"id="totalInQueueWorkers">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Running
+                        <span class="badge badge-success badge-pill"id="totalRunningWorkers">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        Last time
+                        <span class="badge badge-secondary badge-pill"id="totalInQueueDiff">0</span>
+                    </li>
+                </ul>
             <p class="pt-3">
                 <button class="btn btn-secondary btn-sm btn-block" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
                     Filter
@@ -30,6 +39,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" integrity="sha384-h0AbiXch4ZDo7tp9hKZ4TsHbi047NrKGLO3SEJAg45jXxnGIfYzk4Si90RDIqNm1" crossorigin="anonymous"></script>
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.highcharts.com/modules/exporting.js"></script>
-    <script src="js/main.js?t=<?php echo time();?>"></script>
+    <script src="js/main.js?t=<?php echo time(); ?>"></script>
 </div>
 <?php include 'content_footer.tpl.php';?>
