@@ -6,6 +6,7 @@
             <th><a href="#" class="sortTable" data-id="<?php echo GA_ServerList::SORT_JOBS_IN_QUEUE ?>" data-sort="desc" data-group="none">Jobs in queue</a></th>
             <th><a href="#" class="sortTable" data-id="<?php echo GA_ServerList::SORT_JOBS_RUNNING ?>" data-sort="desc" data-group="none">Jobs running</a></th>
             <th><a href="#" class="sortTable" data-id="<?php echo GA_ServerList::SORT_WORKERS ?>" data-sort="desc" data-group="none">Workers registered</a></th>
+            <th>Status</th>
         </tr>
     </thead>
     <tbody></tbody>

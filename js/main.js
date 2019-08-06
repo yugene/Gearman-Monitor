@@ -125,6 +125,7 @@ function requestTableData(url, element) {
                                 ? '<img src="images/s_warn.png" />'
                                 : "";
                         html += obj["data"][i]["capable_workers"] + "</td>";
+                        html += '<td>' + (obj["data"][i]["jobs_running"] > 0 ? '<span class="badge badge-success">running</span>' : (obj["data"][i]["capable_workers"] > 0 ? '<span class="badge badge-secondary">iddle</span>' :'<span class="badge badge-secondary">not registred</span>')) +'</td>';
                         html + "</tr>";
                     }
                     setStorageTotal(totalInQueueWorkers, totalRunningWorkers);
