@@ -154,7 +154,8 @@ $(document).ready(function() {
         xAxis: {
             type: "datetime",
             tickPixelInterval: 150,
-            maxZoom: 20 * 1000
+            maxZoom: 20 * 1000,
+            title: false
         },
         yAxis: {
             minPadding: 0.2,
@@ -164,9 +165,11 @@ $(document).ready(function() {
         series: [
             {
                 name: "Total",
-                data: []
+                data: [],
+                showInLegend:false
             }
-        ]
+        ],
+        credits:{enabled:false}
     });
     setInterval(function () {
         requestTableData("queue.php?json", ".result");
