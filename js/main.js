@@ -28,7 +28,7 @@ function requestChartData() {
     });
 }
 
-function setStorageTotal(totalInQueueWorkers, totalRunningWorkers) {
+function setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, totalFunctions) {
     var lastTotalRunningWorkers = parseInt(
         sessionStorage.getItem("totalInQueueWorkers")
     );
@@ -39,6 +39,8 @@ function setStorageTotal(totalInQueueWorkers, totalRunningWorkers) {
     $("#totalInQueueWorkers").html(totalInQueueWorkers);
     $("#totalInQueueDiff").html(diff);
     $("#totalRunningWorkers").html(totalRunningWorkers);
+    $("#totalJobs").html(totalJobs);
+    $("#totalFunctions").html(totalFunctions);
     if (totalInQueueWorkers) {
         sessionStorage.setItem("totalInQueueWorkers", totalInQueueWorkers);
     }
@@ -76,14 +78,20 @@ function requestTableData(url, element) {
             if (obj["data"]) {
                 var totalInQueueWorkers = 0;
                 var totalRunningWorkers = 0;
+                var totalJobs = 0;
+                var totalFunctions = 0;
                 if (obj["data"].length > 0) {
                     html = "";
                     for (var i = 0; i < obj["data"].length; i++) {
+                        totalFunctions++;
                         totalInQueueWorkers += parseInt(
                             obj["data"][i]["in_queue"]
                         );
                         totalRunningWorkers += parseInt(
                             obj["data"][i]["jobs_running"]
+                        );
+                        totalJobs += parseInt(
+                            obj["data"][i]["capable_workers"]
                         );
 
                         html +=
@@ -128,7 +136,7 @@ function requestTableData(url, element) {
                         html += '<td>' + (obj["data"][i]["jobs_running"] > 0 ? '<span class="badge badge-success">running</span>' : (obj["data"][i]["capable_workers"] > 0 ? '<span class="badge badge-secondary">iddle</span>' :'<span class="badge badge-secondary">not registred</span>')) +'</td>';
                         html + "</tr>";
                     }
-                    setStorageTotal(totalInQueueWorkers, totalRunningWorkers);
+                    setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, totalFunctions);
                     $("#table > tbody").html(html);
                 }
             }

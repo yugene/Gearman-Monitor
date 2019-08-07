@@ -5,17 +5,25 @@
         <div class="cols-sm-12 col-md-6 pt-3">
 
                 <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-1">
                         In Queue
                         <span class="badge badge-warning badge-pill"id="totalInQueueWorkers">0</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-1">
                         Running
                         <span class="badge badge-success badge-pill"id="totalRunningWorkers">0</span>
                     </li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-1">
                         Last time
                         <span class="badge badge-secondary badge-pill"id="totalInQueueDiff">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-1">
+                        Functions
+                        <span class="badge badge-light badge-pill"id="totalFunctions">0</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center p-1">
+                        Workers registered
+                        <span class="badge badge-light badge-pill"id="totalJobs">0</span>
                     </li>
                 </ul>
             <p class="pt-3">
