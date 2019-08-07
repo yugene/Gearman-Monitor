@@ -6,23 +6,23 @@
 
                 <ul class="list-group">
                     <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                        In Queue
+                        <small>In Queue</small>
                         <span class="badge badge-warning badge-pill"id="totalInQueueWorkers">0</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                        Running
+                        <small>Running</small>
                         <span class="badge badge-success badge-pill"id="totalRunningWorkers">0</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                        Last time
+                        <small>Last time</small>
                         <span class="badge badge-secondary badge-pill"id="totalInQueueDiff">0</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                        Functions
+                        <small>Functions</small>
                         <span class="badge badge-light badge-pill"id="totalFunctions">0</span>
                     </li>
                     <li class="list-group-item d-flex justify-content-between align-items-center p-1">
-                        Workers registered
+                        <small>Workers registered</small>
                         <span class="badge badge-light badge-pill"id="totalJobs">0</span>
                     </li>
                 </ul>
