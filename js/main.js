@@ -28,7 +28,7 @@ function requestChartData() {
     });
 }
 
-function setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, totalFunctions) {
+function setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, totalFunctions, totalProblem) {
     var lastTotalRunningWorkers = parseInt(
         sessionStorage.getItem("totalInQueueWorkers")
     );
@@ -41,6 +41,7 @@ function setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, to
     $("#totalRunningWorkers").html(totalRunningWorkers);
     $("#totalJobs").html(totalJobs);
     $("#totalFunctions").html(totalFunctions);
+    $("#totalProblem").html(totalProblem);
     if (totalInQueueWorkers) {
         sessionStorage.setItem("totalInQueueWorkers", totalInQueueWorkers);
     }
@@ -80,10 +81,15 @@ function requestTableData(url, element) {
                 var totalRunningWorkers = 0;
                 var totalJobs = 0;
                 var totalFunctions = 0;
+                var totalProblem = 0;
                 if (obj["data"].length > 0) {
                     html = "";
                     for (var i = 0; i < obj["data"].length; i++) {
                         totalFunctions++;
+                        if (obj["data"][i]["capable_workers"] == 0 &&
+                            obj["data"][i]["in_queue"] > 0) {
+                            totalProblem++;
+                        }
                         totalInQueueWorkers += parseInt(
                             obj["data"][i]["in_queue"]
                         );
@@ -136,7 +142,7 @@ function requestTableData(url, element) {
                         html += '<td>' + (obj["data"][i]["jobs_running"] > 0 ? '<span class="badge badge-success">running</span>' : (obj["data"][i]["capable_workers"] > 0 ? '<span class="badge badge-secondary">iddle</span>' :'<span class="badge badge-secondary">not registred</span>')) +'</td>';
                         html + "</tr>";
                     }
-                    setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, totalFunctions);
+                    setStorageTotal(totalInQueueWorkers, totalRunningWorkers, totalJobs, totalFunctions, totalProblem);
                     $("#table > tbody").html(html);
                 }
             }
