@@ -17,9 +17,18 @@
  * ++ $i;
  */
 
-$i = 0;
-$cfgServers = array();
+$i          = 0;
+$cfgServers = [];
 
 $cfgServers[$i]['address'] = '127.0.0.1';
-$cfgServers[$i]['name'] = '';
-++ $i;
+$cfgServers[$i]['name']    = '';
+++$i;
+
+/**
+ * Graph time to refresh JS
+ */
+$jsGraphTime = 2000; //two secondis
+/**
+ * Table time to refresh JS
+ */
+$jsTableTime = 5000;
